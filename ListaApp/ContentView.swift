@@ -8,14 +8,20 @@
 import SwiftUI
 
 struct ContentView: View {
+    @StateObject private var listaTareas = ListaTareas()
     var body: some View {
-        VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundColor(.accentColor)
-            Text("Hello, world!")
+        NavigationView{
+            VStack{
+                List{
+                    ForEach(listaTareas.tareas){
+                        tarea in TareaIndividual(tarea: tarea)
+                    }
+                }
+                
+                NavigationLink(destination: NuevaTareaView(listaTareas: listaTareas), label: {Text("ir a la ventana del perfil")}).padding().foregroundColor(.black)
+            }.navigationTitle("Tareas")
         }
-        .padding()
+        //TareaIndividual(tarea: Tarea(titulo: "Ir al baño", completado: false))
     }
 }
 
